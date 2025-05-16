@@ -8,6 +8,14 @@ const nextPage = () => {
 }
 
 const enterVR = () => {
+  const utterance = new SpeechSynthesisUtterance("我會講話你是不是嚇一跳？")
+  utterance.lang = 'zh-TW';
+  // 可選：語速、音高、音量
+  utterance.rate = 1;   // 0.1 - 10
+  utterance.pitch = 1.6;  // 0 - 2
+  utterance.volume = 1; // 0 - 1
+  speechSynthesis.speak(utterance);
+
   useVR.value = true
   const enterVRButton = document.querySelector('a-scene')?.components?.vrModeToggle?.enterVRButton
   enterVRButton?.click()
@@ -108,4 +116,5 @@ a-scene {
   border-radius: 4px;
   cursor: pointer;
 }
+
 </style>

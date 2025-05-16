@@ -35,9 +35,23 @@ button {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        animation: swing 1s ease-in-out infinite;
+        transform-origin: center;
         &:hover {
             cursor: pointer;
             box-shadow: 0 0 20px 10px rgba(#1c6b94, 0.7);
         }
+    }
+}
+
+@keyframes swing {
+    0% {
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        transform: translate(calc(-50% - 10px), -50%);
+    }
+    100% {
+        transform: translate(-50%, -50%);
     }
 }
