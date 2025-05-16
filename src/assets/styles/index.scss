@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    outline: initial;
+    border: initial;
+}
+
+h1 {
+    color: orangered;
+}
+
+.sceneSection {
+    width: 100dvw;
+    height: 110dvh;
+    position: relative;
+}
+
+a-scene {
+    width: 100dvw;
+    height: 100dvh;
+    display: block;
+}
+
+button {
+    color: orangered;
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    &.clickbtn {
+        position: absolute;
+        z-index: 99;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0 20px 10px rgba(#1c6b94, 0.7);
+        }
+    }
+}
