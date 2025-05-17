@@ -40,12 +40,12 @@ const nextPage = (page) => {
   <div>
     <section v-if="pageNum === 0" class="sceneSection sceneSection-1">
       <a-scene :raycaster="useVr ? 'objects: .clickable' : null">
-        <video id="video360" autoplay loop muted playsinline crossorigin="anonymous">
+        <!-- <video id="video360" autoplay loop muted playsinline crossorigin="anonymous">
           <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-forest-9584/1080p.mp4" type="video/mp4" />
         </video>
-        <a-sky src="#video360"></a-sky>
+        <a-sky src="#video360"></a-sky> -->
 
-        <!-- <a-sky src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"></a-sky> -->
+        <a-sky src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"></a-sky>
 
         <a-entity
           id="vr-button"
