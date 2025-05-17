@@ -2,12 +2,19 @@
 import { ref, onMounted } from 'vue'
 import { SpeechFn } from '../assets/utils/functions/speech'
 
+const props = defineProps({
+  useVr: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const images = [
   'https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg',
   'https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg',
   'https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg'
 ]
-const useVR = ref(false)
+
 const pageNum = ref(0)
 const currentIndex = ref(0)
 
@@ -27,47 +34,22 @@ const nextPage = (page) => {
       break
   }
 }
-
-const enterVR = () => {
-  SpeechFn("我會講話你是不是嚇一跳？", 'zh-TW', 1, 1.6, 1)
-
-  useVR.value = true
-  const enterVRButton = document.querySelector('a-scene')?.components?.vrModeToggle?.enterVRButton
-  enterVRButton?.click()
-}
-
-const skipVR = () => {
-  useVR.value = false
-
-  const scene = document.querySelector('a-scene')
-  if (scene && scene.components.raycaster) {
-    scene.removeAttribute('raycaster')
-  }
-  const cam = document.querySelector('a-camera')
-  if (cam && cam.components.cursor) {
-    cam.removeAttribute('cursor')
-  }
-}
-
-// 如果你想 onMounted 時自動問一次（可選）
-onMounted(() => {
-  const autoAsk = false // 想要自動問的話，改成 true
-  if (autoAsk) {
-    if (confirm('是否啟用 VR 模式？')) enterVR()
-    else skipVR()
-  }
-})
 </script>
 
 <template>
   <div>
     <section v-if="pageNum === 0" class="sceneSection sceneSection-1">
-      <a-scene :raycaster="useVR ? 'objects: .clickable' : null">
-        <a-sky src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"></a-sky>
+      <a-scene :raycaster="useVr ? 'objects: .clickable' : null">
+        <video id="video360" autoplay loop muted playsinline crossorigin="anonymous">
+          <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-forest-9584/1080p.mp4" type="video/mp4" />
+        </video>
+        <a-sky src="#video360"></a-sky>
+
+        <!-- <a-sky src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"></a-sky> -->
 
         <a-entity
           id="vr-button"
-          v-if="useVR"
+          v-if="useVr"
           class="clickable"
           geometry="primitive: plane; height: 0.5; width: 1.5"
           material="color: #42b983"
@@ -86,7 +68,7 @@ onMounted(() => {
         </a-entity>
         <button v-else class="clickbtn" @click="nextPage(1)">findmyProfessor</button>
 
-        <a-camera v-if="useVR">
+        <a-camera v-if="useVr">
           <a-cursor></a-cursor>
         </a-camera>
         <a-camera v-else></a-camera>
@@ -94,12 +76,12 @@ onMounted(() => {
     </section>
 
     <section v-else-if="pageNum === 1" class="sceneSection sceneSection-2">
-      <a-scene :raycaster="useVR ? 'objects: .clickable' : null">
+      <a-scene :raycaster="useVr ? 'objects: .clickable' : null">
         <a-sky src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg"></a-sky>
 
         <a-entity
           id="vr-button"
-          v-if="useVR"
+          v-if="useVr"
           class="clickable"
           geometry="primitive: plane; height: 0.5; width: 1.5"
           material="color: #42b983"
@@ -123,7 +105,7 @@ onMounted(() => {
           <button class="findingBtn" @click="nextPage(2)">出發了解教授...</button>
         </div>
 
-        <a-camera v-if="useVR">
+        <a-camera v-if="useVr">
           <a-cursor></a-cursor>
         </a-camera>
         <a-camera v-else></a-camera>
@@ -131,7 +113,7 @@ onMounted(() => {
     </section>
 
     <section v-else-if="pageNum === 2" class="sceneSection sceneSection-2">
-      <a-scene :raycaster="useVR ? 'objects: .clickable' : null">
+      <a-scene :raycaster="useVr ? 'objects: .clickable' : null">
         <a-sky :src="images[currentIndex]"></a-sky>
 
         <!-- 左右控制按鈕 -->

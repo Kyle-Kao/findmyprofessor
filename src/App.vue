@@ -1,18 +1,47 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { SpeechFn } from './assets/utils/functions/speech';
 import Section1 from './components/Section1.vue';
 
 const currentSection = ref(1)
+const useVR = ref(false)
+
+const enterVR = () => {
+  SpeechFn("我會講話你是不是嚇一跳？", 'zh-TW', 1, 1.6, 1)
+
+  useVR.value = true
+  const enterVRButton = document.querySelector('a-scene')?.components?.vrModeToggle?.enterVRButton
+  enterVRButton?.click()
+}
+
+const skipVR = () => {
+  useVR.value = false
+
+  const scene = document.querySelector('a-scene')
+  if (scene && scene.components.raycaster) {
+    scene.removeAttribute('raycaster')
+  }
+  const cam = document.querySelector('a-camera')
+  if (cam && cam.components.cursor) {
+    cam.removeAttribute('cursor')
+  }
+}
 
 onMounted(() => {
   const params = new URLSearchParams(window.location.search)
   currentSection.value = parseInt(params.get('section')) || 1
+
+  const autoAsk = false // 想要自動問的話，改成 true
+  if (autoAsk) {
+    if (confirm('是否啟用 VR 模式？')) enterVR()
+    else skipVR()
+  }
 })
 </script>
 
 <template>
   <div>
-    <Section1 v-if="currentSection === 1"/>
+    <Section1 v-if="currentSection === 1" :use-vr="useVR"/>
 
     <section>
       <h1>區塊2</h1>
