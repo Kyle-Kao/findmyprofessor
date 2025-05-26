@@ -29,6 +29,12 @@ const skipVR = () => {
   }
 }
 
+const nextPage = (page) => {
+  const url = new URL(window.location.href)
+  url.searchParams.set('section', page)
+  window.location.href = url.toString()
+}
+
 onMounted(() => {
   const params = new URLSearchParams(window.location.search)
   currentSection.value = parseInt(params.get('section')) || 0
@@ -45,7 +51,7 @@ onMounted(() => {
   <div>
     <div style="width: 100dvw; background-color: #000; position: sticky; left: 0; top: 0; z-index: 3;">
       <div class="navBar">
-        <div class="left">Find</div>
+        <div class="left" @click="nextPage(0)">Find</div>
         <div class="right">
           <div>Home</div>
           <div>Intro</div>
