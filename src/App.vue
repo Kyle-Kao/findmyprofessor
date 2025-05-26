@@ -9,8 +9,6 @@ const currentSection = ref(0)
 const useVR = ref(false)
 
 const enterVR = () => {
-  SpeechFn("我會講話你是不是嚇一跳？", 'zh-TW', 1, 1.6, 1)
-
   useVR.value = true
   const enterVRButton = document.querySelector('a-scene')?.components?.vrModeToggle?.enterVRButton
   enterVRButton?.click()
@@ -62,7 +60,7 @@ onMounted(() => {
     </div>
     <Entry v-if="currentSection === 0"/>
 
-    <Section1 v-else-if="currentSection === 1" />
+    <Section1 v-else-if="currentSection === 1" :use-vr="useVR"/>
 
     <Section99 v-else-if="currentSection === 99" :use-vr="useVR"/>
 
