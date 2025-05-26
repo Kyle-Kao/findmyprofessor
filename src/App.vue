@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { SpeechFn } from './assets/utils/functions/speech';
-import Section1 from './components/Section1.vue';
+import Section99 from './components/Section99.vue';
+import Section1 from './components/Section1.vue'
+import Entry from './components/Entry.vue'
 
-const currentSection = ref(1)
+const currentSection = ref(0)
 const useVR = ref(false)
 
 const enterVR = () => {
@@ -29,7 +31,7 @@ const skipVR = () => {
 
 onMounted(() => {
   const params = new URLSearchParams(window.location.search)
-  currentSection.value = parseInt(params.get('section')) || 1
+  currentSection.value = parseInt(params.get('section')) || 0
 
   const autoAsk = false // 想要自動問的話，改成 true
   if (autoAsk) {
@@ -41,13 +43,28 @@ onMounted(() => {
 
 <template>
   <div>
-    <Section1 v-if="currentSection === 1" :use-vr="useVR"/>
+    <div style="width: 100dvw; background-color: #000; position: sticky; left: 0; top: 0; z-index: 3;">
+      <div class="navBar">
+        <div class="left">Find</div>
+        <div class="right">
+          <div>Home</div>
+          <div>Intro</div>
+          <div>Record</div>
+          <div class="go">GO</div>
+        </div>
+      </div>
+    </div>
+    <Entry v-if="currentSection === 0"/>
 
-    <section>
+    <Section1 v-else-if="currentSection === 1" />
+
+    <Section99 v-else-if="currentSection === 99" :use-vr="useVR"/>
+
+    <section v-else-if="currentSection === 2">
       <h1>區塊2</h1>
     </section>
 
-    <section class="controller">
+    <section v-if="currentSection !== 0" class="controller">
       <div class="prompt-box">
         <p>是否要啟用 VR 模式？</p>
         <button @click="enterVR">是</button>

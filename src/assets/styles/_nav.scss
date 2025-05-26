@@ -1,0 +1,28 @@
+.navBar {
+    max-width: 1320px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    &>div {
+        color: #fff;
+    }
+    .left {
+        font-weight: bold;
+        font-size: 28px;
+    }
+    .right {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        .go {
+            margin-left: 20px;
+            background-color: #022855;
+            border-radius: 20px;
+            padding: 5px 30px;
+        }
+    }
+}
