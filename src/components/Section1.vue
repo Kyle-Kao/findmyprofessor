@@ -10,7 +10,7 @@ onMounted(() => {
 <template>
   <div class="section1">
     <a-scene>
-      <a-sky src="/findmyprofessor/public/test1.JPG" rotation="0 -90 0"></a-sky>
+      <a-sky src="/test1.JPG" rotation="0 -90 0"></a-sky>
     </a-scene>
 
     <div class="section1_content">
