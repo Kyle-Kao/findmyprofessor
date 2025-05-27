@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { SpeechFn } from './assets/utils/functions/speech';
 import Section99 from './components/Section99.vue';
 import Section1 from './components/Section1.vue'
+import Section2 from './components/Section2.vue'
 import Entry from './components/Entry.vue'
 
 const currentSection = ref(0)
@@ -62,11 +63,9 @@ onMounted(() => {
 
     <Section1 v-else-if="currentSection === 1" :use-vr="true"/>
 
-    <Section99 v-else-if="currentSection === 99" :use-vr="useVR"/>
+    <Section2 v-else-if="currentSection === 2" :use-vr="true"/>
 
-    <section v-else-if="currentSection === 2">
-      <h1>區塊2</h1>
-    </section>
+    <Section99 v-else-if="currentSection === 99" :use-vr="useVR"/>
 
     <section v-if="false" class="controller">
       <div class="prompt-box">
