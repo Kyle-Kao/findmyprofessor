@@ -60,7 +60,7 @@ onMounted(() => {
     </div>
     <Entry v-if="currentSection === 0"/>
 
-    <Section1 v-else-if="currentSection === 1" :use-vr="useVR"/>
+    <Section1 v-else-if="currentSection === 1" :use-vr="true"/>
 
     <Section99 v-else-if="currentSection === 99" :use-vr="useVR"/>
 
@@ -68,7 +68,7 @@ onMounted(() => {
       <h1>區塊2</h1>
     </section>
 
-    <section v-if="currentSection !== 0" class="controller">
+    <section v-if="false" class="controller">
       <div class="prompt-box">
         <p>是否要啟用 VR 模式？</p>
         <button @click="enterVR">是</button>
