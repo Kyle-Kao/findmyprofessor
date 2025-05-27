@@ -71,7 +71,7 @@ onMounted(() => {
     <div class="section0">
       <a-scene>
         <a-assets>
-          <img id="panorama" src="https://kyle-kao.github.io/findmyprofessor/R0010088.jpg" />
+          <img id="panorama" src="https://kyle-kao.github.io/findmyprofessor/R0010088.JPG" />
           <video ref="video" id="myVideo" src="/star1.mp4" crossorigin="anonymous" loop></video>
           <img id="img1" src="/text3.png" />
           <img id="img2" src="/text4.png" />
