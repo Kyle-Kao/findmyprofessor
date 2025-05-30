@@ -6,6 +6,8 @@ import Section1 from './components/Section1.vue'
 import Section2 from './components/Section2.vue'
 import Section3 from './components/Section3.vue'
 import Section4 from './components/Section4.vue'
+import Section5 from './components/Section5.vue'
+import Section6 from './components/Section6.vue'
 import Entry from './components/Entry.vue'
 
 const currentSection = ref(0)
@@ -70,6 +72,10 @@ onMounted(() => {
     <Section3 v-else-if="currentSection === 3" :use-vr="true"/>
 
     <Section4 v-else-if="currentSection === 4" :use-vr="true"/>
+
+    <Section5 v-else-if="currentSection === 5" :use-vr="true"/>
+    
+    <Section6 v-else-if="currentSection === 6" :use-vr="true"/>
 
     <Section99 v-else-if="currentSection === 99" :use-vr="useVR"/>
 

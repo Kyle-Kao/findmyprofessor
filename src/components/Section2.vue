@@ -374,13 +374,16 @@ onMounted(() => {
   &.showSwiper{ 
     display: block;
   }
+  .title{
+    position: absolute;
+    top: -65%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
 }
-.title{
-  position: absolute;
-  top: -65%;
-  left: 50%;
-  transform: translateX(-50%);
-}
+
 .swiper-horizontal{
   padding: 20px;
 }
@@ -393,10 +396,6 @@ onMounted(() => {
   transform: scale(1.05);
   opacity: 1;
   z-index: 10;
-}
-.title {
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
 }
 .card {
   background: white;
