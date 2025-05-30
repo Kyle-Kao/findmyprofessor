@@ -27,9 +27,6 @@ const playMedia = () => {
   setTimeout(() => {
     assetsLoaded.value = true;
   },100)
-  setTimeout(() => {
-    currentImg.value = 'img2'
-  }, 15000)
 
   aud.addEventListener('ended', () => {
   // 停止影片播放
@@ -50,7 +47,7 @@ const changePage = (page) => {
 }
 
 onMounted(() => {
-  currentBg.value = 'panorama'
+  currentBg.value = 'img1'
 
   const assets = document.querySelector('a-assets');
   if (assets) {
@@ -72,7 +69,7 @@ onMounted(() => {
     <div class="section0">
       <a-scene>
         <a-assets>
-          <img id="panorama" src="https://kyle-kao.github.io/findmyprofessor/R0010088.JPG" />
+          <img id="img1" src="/text6.png" />
           <video ref="video" id="video360" src="/touch.mp4" loop crossorigin="anonymous"></video>
         </a-assets>
 
@@ -106,8 +103,8 @@ onMounted(() => {
           id="vr-button-img"
           :visible="useVr"
           class="clickable"
-          geometry="primitive: plane; height: .6; width: 3"
-          :material="`src: #${currentImg}; transparent: true`"
+          geometry="primitive: plane; height: 1; width: 3"
+          :material="{ src:`#${currentImg}`, transparent: true }"
           position="0 0 -3"
           event-set__enter="_event: mouseenter; material.color: #70e4c2"
           event-set__leave="_event: mouseleave; material.color: #42b983"

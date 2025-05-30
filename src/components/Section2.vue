@@ -381,6 +381,8 @@ onMounted(() => {
     transform: translateX(-50%);
     font-size: 1.8rem;
     margin-bottom: 2rem;
+    padding: 10px;
+    background: rgba(255,255,255,.3);
   }
 }
 
