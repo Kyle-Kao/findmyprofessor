@@ -20,36 +20,31 @@ const audio = ref(null)
 
 const playMedia = () => {
   const vid = video.value
-  const vid1 = video1.value
   const aud = audio.value
   vid.play()
   aud.play()
 
-  let a = setTimeout(() => {
+  setTimeout(() => {
     assetsLoaded.value = true;
   },100)
-  let b = setTimeout(() => {
-    clearTimeout(a)
+  setTimeout(() => {
     currentImg.value = 'img2'
   }, 15000)
 
   aud.addEventListener('ended', () => {
   // 停止影片播放
   if (vid && !vid.paused) {
-    clearTimeout(b)
     vid.pause();
     showBtn.value = true
-    showBubble.value = true
-    currentBg.value = 'video360'
-    vid1.play();
   }
-  console.log('currentBg:: ', currentBg.value);
 })
 }
 
-const changePage = (prof) => {
+const changePage = (page) => {
   const url = new URL(window.location.href)
-  url.searchParams.set('section', 4)
+  const urlParams = new URLSearchParams(window.location.search)
+  const prof = urlParams.get('prof')
+  url.searchParams.set('section', page)
   url.searchParams.set('prof', prof)
   window.location.href = url.toString()
 }
@@ -78,29 +73,10 @@ onMounted(() => {
       <a-scene>
         <a-assets>
           <img id="panorama" src="https://kyle-kao.github.io/findmyprofessor/R0010088.JPG" />
-          <video ref="video" id="myVideo" src="/star1.mp4" crossorigin="anonymous" loop></video>
-          <img id="img1" src="/text3.png" />
-          <img id="img2" src="/text4.png" />
-          <video ref="video1" id="video360" src="/bubble.mp4" loop crossorigin="anonymous"></video>
-          <img id="bubble1" src="/8.png" />
-          <img id="bubble2" src="/15.png" />
+          <video ref="video" id="video360" src="/touch.mp4" loop crossorigin="anonymous"></video>
         </a-assets>
 
-        <!-- 影片  -->
-        <a-video
-          v-if="!showBtn"
-          src="#myVideo"
-          width="6"
-          height="3.5"
-          position="0 2 -3.5"
-          autoplay
-          loop
-          crossorigin="anonymous"
-          playsinline
-        ></a-video>
-
-        <a-sky :src="`#${currentBg}`" rotation="0 -90 0"></a-sky>
-        <!-- <a-sky src="#video360" rotation="0 -90 0"></a-sky> -->
+        <a-sky :src="`#video360`" rotation="0 -130 0"></a-sky>
 
         <a-entity
           v-if="!assetsLoaded"
@@ -138,35 +114,51 @@ onMounted(() => {
         >
         </a-entity>
 
-        <!-- Bubbles -vr -->
+        <!-- 上一頁 -->
         <a-entity
-          v-if="assetsLoaded && showBubble"
+          v-if="assetsLoaded && showBtn"
           class="clickable"
-          geometry="primitive: plane; height: 0.4; width: 0.4"
-          :material="`src: #bubble1; opacity: 1; transparent: true`"
-          position="-2 .5 -3"
-          @click="changePage('han')"
+          geometry="primitive: plane; height: 0.4; width: 0.8"
+          material="color: #ffffff; opacity: 0.6"
+          position="-2.5 .5 -3"
+          @click="changePage(3)"
           event-set__enter="_event: mouseenter; material.color: #cccccc"
           event-set__leave="_event: mouseleave; material.color: #ffffff"
           animation__hover="property: scale; startEvents: mouseenter; to: 1.1 1.1 1.1; dur: 200"
           animation__leave="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 200"
         >
+          <a-text
+            value="< Pre"
+            align="center"
+            color="#000"
+            position="0 .1 0.01"
+            width="5"
+            font="https://cdn.aframe.io/fonts/mozillavr.fnt"
+          ></a-text>
         </a-entity>
 
-        <!-- Bubbles -冒險者 -->
-        <a-entity
-          v-if="assetsLoaded && showBubble"
-          class="clickable"
-          geometry="primitive: plane; height: 0.4; width: 0.4"
-          :material="`src: #bubble2; opacity: 1; transparent: true`"
-          position="2.5 2.5 -3"
-          @click="changePage('tai')"
-          event-set__enter="_event: mouseenter; material.color: #cccccc"
-          event-set__leave="_event: mouseleave; material.color: #ffffff"
-          animation__hover="property: scale; startEvents: mouseenter; to: 1.1 1.1 1.1; dur: 200"
-          animation__leave="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 200"
-        >
-        </a-entity>
+        <!-- 下一步按鈕 -->
+      <a-entity
+        v-if="assetsLoaded && showBtn"
+        class="clickable"
+        geometry="primitive: plane; height: 0.4; width: 0.8"
+        material="color: #ffffff; opacity: 0.6"
+        position="2.5 .5 -3"
+        @click="changePage(5)"
+        event-set__enter="_event: mouseenter; material.color: #cccccc"
+        event-set__leave="_event: mouseleave; material.color: #ffffff"
+        animation__hover="property: scale; startEvents: mouseenter; to: 1.1 1.1 1.1; dur: 200"
+        animation__leave="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 200"
+      >
+        <a-text
+          value="Next >"
+          align="center"
+          color="#000"
+          position="0 0.1 0.01"
+          width="5"
+          font="https://cdn.aframe.io/fonts/mozillavr.fnt"
+        ></a-text>
+      </a-entity>
 
         <a-camera>
           <a-cursor></a-cursor>
@@ -176,7 +168,7 @@ onMounted(() => {
       
 
       <audio id="audioNarration" ref="audio">
-        <source src="/audios/speech2.m4a" type="audio/mp4" />
+        <source src="/audios/speech4.mp3" type="audio/mp4" />
       </audio>
     </div>
 

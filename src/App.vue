@@ -5,6 +5,7 @@ import Section99 from './components/Section99.vue';
 import Section1 from './components/Section1.vue'
 import Section2 from './components/Section2.vue'
 import Section3 from './components/Section3.vue'
+import Section4 from './components/Section4.vue'
 import Entry from './components/Entry.vue'
 
 const currentSection = ref(0)
@@ -63,10 +64,12 @@ onMounted(() => {
     <Entry v-if="currentSection === 0"/>
 
     <Section1 v-else-if="currentSection === 1" :use-vr="true"/>
-    
+
     <Section2 v-else-if="currentSection === 2" :use-vr="true"/>
 
     <Section3 v-else-if="currentSection === 3" :use-vr="true"/>
+
+    <Section4 v-else-if="currentSection === 4" :use-vr="true"/>
 
     <Section99 v-else-if="currentSection === 99" :use-vr="useVR"/>
 
