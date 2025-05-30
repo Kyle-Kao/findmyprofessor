@@ -13,7 +13,7 @@ const currentTeacher = ref('')
 const assetsLoaded = ref(false);
 const showBtn = ref(false);
 const showBubble = ref(false);
-const currentImg = ref('teacherTxt')
+const currentImg = ref('teachertaiTxt')
 const currentBg = ref('panorama')
 const video = ref(null)
 const video1 = ref(null)
@@ -52,7 +52,7 @@ onMounted(() => {
     assets.addEventListener('loaded', () => {
       // assetsLoaded.value = true;
       // 載入完成後才顯示圖1
-      currentImg.value = 'teacherTxt';
+      currentImg.value = `teacher${prof}Txt`;
     });
   }
 
@@ -71,9 +71,16 @@ onMounted(() => {
           <img id="class1" src="/class/class1.JPG" />
           <img id="class2" src="/class/class2.JPG" />
           <img id="class3" src="/class/class3.JPG" />
-          <img id="teacherTxt" src="/teacher/img_tea_tai.png" />
-          <video ref="video" :id="`${currentTeacher}`" src="/teacher/tai.mp4" loop crossorigin="anonymous"></video>
+          <img id="teachertaiTxt" src="/teacher/img_tea_tai.png" />
+          <video ref="video" id="tai" src="/teacher/tai.mp4" loop crossorigin="anonymous"></video>
+          <video id="tai" src="/teacher/tai.mp4" loop crossorigin="anonymous"></video>
+          <img id="teacherhanTxt" src="/teacher/img_tea_han.png" />
+          <video ref="video" id="han" src="/teacher/han.mp4" loop crossorigin="anonymous"></video>
           <video id="han" src="/teacher/han.mp4" loop crossorigin="anonymous"></video>
+
+          <!-- <img :id="`teacher${currentTeacher}Txt`" :src="`/teacher/img_tea_${currentTeacher}.png`" />
+          <video ref="video" :id="`${currentTeacher}`" :src="`/teacher/${currentTeacher}.mp4`" loop crossorigin="anonymous"></video>
+          <video :id="`${currentTeacher}`" :src="`/teacher/${currentTeacher}.mp4`" loop crossorigin="anonymous"></video> -->
         </a-assets>
 
         <!-- 影片  -->
@@ -89,7 +96,7 @@ onMounted(() => {
           playsinline
         ></a-video>
 
-        <a-sky :src="`#class2`" rotation="0 -90 0"></a-sky>
+        <a-sky :src="`${currentTeacher === 'tai'? '#class2': '#class1'}`" rotation="0 -90 0"></a-sky>
 
         <a-entity
           v-if="!assetsLoaded"
