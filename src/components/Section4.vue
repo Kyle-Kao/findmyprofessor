@@ -41,8 +41,14 @@ const changePage = (page) => {
   const url = new URL(window.location.href)
   const urlParams = new URLSearchParams(window.location.search)
   const prof = urlParams.get('prof')
-  url.searchParams.set('section', page)
-  url.searchParams.set('prof', prof)
+
+  if(prof === 'noMatch') {
+    url.searchParams.set('section', 6)
+    url.searchParams.set('prof', prof)
+  } else {
+    url.searchParams.set('section', page)
+    url.searchParams.set('prof', prof)
+  }
   window.location.href = url.toString()
 }
 

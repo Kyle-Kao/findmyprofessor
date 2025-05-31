@@ -21,8 +21,9 @@ const audio = ref(null)
 
 const playMedia = () => {
   const vid = video.value
+  const vid1 = video1.value
   const aud = audio.value
-  vid.play()
+  currentTeacher.value === 'tai' ? vid.play() : vid1.play()
   // aud.play()
 
   setTimeout(() => {
@@ -75,7 +76,7 @@ onMounted(() => {
           <video ref="video" id="tai" src="/teacher/tai.mp4" loop crossorigin="anonymous"></video>
           <video id="tai" src="/teacher/tai.mp4" loop crossorigin="anonymous"></video>
           <img id="teacherhanTxt" src="/teacher/img_tea_han.png" />
-          <video ref="video" id="han" src="/teacher/han.mp4" loop crossorigin="anonymous"></video>
+          <video ref="video1" id="han" src="/teacher/han.mp4" loop crossorigin="anonymous"></video>
           <video id="han" src="/teacher/han.mp4" loop crossorigin="anonymous"></video>
 
           <!-- <img :id="`teacher${currentTeacher}Txt`" :src="`/teacher/img_tea_${currentTeacher}.png`" />
