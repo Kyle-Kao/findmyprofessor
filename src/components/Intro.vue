@@ -261,4 +261,20 @@
       list-style: disc;
     }
   }
+
+  @media(max-width: 768px) {
+    .Intro{
+      .title{
+        padding: 0 10px;
+        font-size: 20px;
+        text-align: center;
+      }
+    }
+    .introSection{
+      padding: 20px;
+    }
+    .introSection__box{
+      flex-direction: column;
+    }
+  }
 </style>

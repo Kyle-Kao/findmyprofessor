@@ -64,7 +64,7 @@ onMounted(() => {
         <div class="right">
           <div @click="nextPage(101)">介紹</div>
           <div @click="nextPage(102)">說明</div>
-          <div class="go">GO</div>
+          <div @click="nextPage(1)" class="go">GO</div>
         </div>
       </div>
     </div>

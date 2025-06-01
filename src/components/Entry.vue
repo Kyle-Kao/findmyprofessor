@@ -52,3 +52,36 @@ const nextPage = (page) => {
       </footer>
     </div>
 </template>
+
+<style lang="scss">
+@media(max-width: 768px ) {
+  .entrySelect_content{
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+    .title{
+      font-size: 30px;
+    }
+    .box {
+      & >div{
+        .des{
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  .entryClass_content {
+    width: 100%;
+    .title{
+      font-size: 30px;
+    }
+    span{
+      padding: 0 20px;
+      text-align: center;
+    }
+  }
+  .footer p{
+    font-size: 20px;
+  }
+}
+</style>
