@@ -9,6 +9,8 @@ import Section4 from './components/Section4.vue'
 import Section5 from './components/Section5.vue'
 import Section6 from './components/Section6.vue'
 import Entry from './components/Entry.vue'
+import Intro from './components/Intro.vue';
+import Des from './components/Des.vue';
 
 const currentSection = ref(0)
 const useVR = ref(false)
@@ -34,12 +36,16 @@ const skipVR = () => {
 
 const nextPage = (page) => {
   const url = new URL(window.location.href)
+  const params = new URLSearchParams(window.location.search)
+  currentSection.value = parseInt(params.get('section')) || 0
+
   url.searchParams.set('section', page)
   window.location.href = url.toString()
 }
 
 onMounted(() => {
   const params = new URLSearchParams(window.location.search)
+  // currentSection.value = params.get('section') || 0
   currentSection.value = parseInt(params.get('section')) || 0
 
   const autoAsk = false // 想要自動問的話，改成 true
@@ -56,13 +62,13 @@ onMounted(() => {
       <div class="navBar">
         <div class="left" @click="nextPage(0)">Find</div>
         <div class="right">
-          <div>Home</div>
-          <div>Intro</div>
-          <div>Record</div>
+          <div @click="nextPage(101)">介紹</div>
+          <div @click="nextPage(102)">說明</div>
           <div class="go">GO</div>
         </div>
       </div>
     </div>
+
     <Entry v-if="currentSection === 0"/>
 
     <Section1 v-else-if="currentSection === 1" :use-vr="true"/>
@@ -74,10 +80,14 @@ onMounted(() => {
     <Section4 v-else-if="currentSection === 4" :use-vr="true"/>
 
     <Section5 v-else-if="currentSection === 5" :use-vr="true"/>
-    
+
     <Section6 v-else-if="currentSection === 6" :use-vr="true"/>
 
     <Section99 v-else-if="currentSection === 99" :use-vr="useVR"/>
+
+    <Intro v-else-if="currentSection === 101" />
+
+    <Des v-else-if="currentSection === 102" />
 
     <section v-if="false" class="controller">
       <div class="prompt-box">
